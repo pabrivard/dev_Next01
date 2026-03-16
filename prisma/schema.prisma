@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid()) @map("user_ID")
+  name          String?                        @map("user_T_name")
+  email         String?   @unique              @map("user_T_email")
+  emailVerified DateTime?                      @map("user_DT_emailVerifiedAt")
+  image         String?                        @map("user_T_image")
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("n01_users")
+}
+
+model Account {
+  id                String  @id @default(cuid()) @map("account_ID")
+  userId            String                       @map("user_ID")
+  type              String                       @map("account_T_type")
+  provider          String                       @map("account_T_provider")
+  providerAccountId String                       @map("account_T_providerAccountId")
+  refresh_token     String?                      @map("account_T_refreshToken")
+  access_token      String?                      @map("account_T_accessToken")
+  expires_at        Int?                         @map("account_N_tokenExpiresAt")
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("n01_accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("session_ID")
+  sessionToken String   @unique              @map("session_T_sessionToken")
+  userId       String                        @map("user_ID")
+  expires      DateTime                      @map("session_DT_expires")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("n01_sessions")
+}
+
+model VerificationToken {
+  identifier String   @map("verification_T_identifier")
+  token      String   @unique @map("verification_T_token")
+  expires    DateTime @map("verification_DT_expires")
+
+  @@unique([identifier, token])
+  @@map("n01_verification_tokens")
+}
