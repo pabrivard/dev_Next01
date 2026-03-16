@@ -16,9 +16,11 @@ Current sprint: Sprint #001 (environment setup).
 | TypeScript               | 5.x         | Language (strict mode)         |
 | Tailwind CSS             | 4.x         | Utility-first CSS              |
 | PostgreSQL                | 16.x        | Database                       |
-| Prisma                   | 6.x         | ORM                            |
+| Prisma                   | 7.x         | ORM                            |
 | next-auth (Auth.js v5)   | beta        | Authentication                 |
 | @auth/prisma-adapter     | latest      | Auth.js ↔ Prisma bridge        |
+| @prisma/adapter-pg       | latest      | Prisma 7 driver adapter for PG |
+| pg                       | latest      | PostgreSQL client (Node.js)    |
 | Resend                   | latest      | Transactional emails           |
 | @react-email/components  | latest      | Email templates                |
 | @react-email/render      | latest      | Email rendering                |
@@ -84,6 +86,14 @@ model User {
   @@map("n01_users")
 }
 ```
+
+### Prisma 7 specifics
+
+- Generator: `provider = "prisma-client"` with `output = "../src/generated/prisma"` — **not** the legacy `prisma-client-js`
+- Generated client import path: `@/generated/prisma/client`
+- Database URL is configured in `prisma.config.ts` (not in `schema.prisma` — Prisma 7 breaking change)
+- Runtime connection uses `@prisma/adapter-pg`: `new PrismaClient({ adapter: new PrismaPg({ connectionString: ... }) })`
+- Never put `url` in the `datasource db {}` block in `schema.prisma`
 
 ---
 
