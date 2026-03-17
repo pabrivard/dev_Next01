@@ -3,7 +3,7 @@
 ## Project description
 
 SaaS web application — Platform connecting relocation companies with independent consultants.
-Current sprint: Sprint #001 (environment setup).
+Current version: 0.1.3 — Current sprint: Sprint #003.
 
 ---
 
@@ -99,12 +99,12 @@ model User {
 
 ## Branch strategy
 
-| Branch       | Purpose                                |
-|--------------|----------------------------------------|
-| `main`       | Production — protected, never push directly |
-| `develop`    | Sprint integration                     |
-| `feat/xxx`   | New features (e.g. `feat/auth-setup`)  |
-| `fix/xxx`    | Bug fixes                              |
+| Branch          | Purpose                                              |
+|-----------------|------------------------------------------------------|
+| `main`          | Production — protected, never push directly          |
+| `preproduction` | Integration branch — Claude Code always pushes here  |
+
+Claude Code must **only push to `preproduction`**. The `main` branch is updated manually by the Product Owner after validation.
 
 ### Conventional Commits
 
@@ -120,11 +120,37 @@ Format: `type: short description`
 
 ---
 
+## Sprint #003 — Key decisions
+
+### Authentication
+- Sign-in entry point: `/` (magic link only, no password field)
+- Provider: Auth.js Email provider via Resend
+- `auth.ts` is Edge-safe (no Node.js modules) — used by middleware only
+- `auth.node.ts` is the full config with `PrismaAdapter` + Resend — used by API routes and Server Actions only
+
+### User roles
+- Three roles: `ADMIN` (developers/admins), `CLIENT` (relocation companies), `PROVIDER` (consultants)
+- Default role at registration: `CLIENT`
+- Column: `user_T_role` on `n01_users`
+
+### Route protection
+- All routes are protected except `/` and `/api/auth/*`
+- Middleware at `middleware.ts` is Edge-compatible — no Node.js native imports
+- Unauthenticated users are redirected to `/`
+
+### Capacitor
+- `server.url` must be a hardcoded string (not `process.env`)
+- Placeholder: `https://your-production-url.com` — replace at deployment
+
+### No deployment this sprint — localhost only
+
+---
+
 ## Important reminders
 
 - **Always check existing code before creating or modifying anything** — avoid duplicates
 - **Always ask for confirmation before deleting files or modifying the production database**
 - **Never modify package.json dependencies without explaining why** (name the package and reason)
 - **Never commit `.env` or `.env.local`** — they contain secrets
-- **Never push directly to `main`** — always go through a PR from `develop`
+- **Never push directly to `main`** — always push to `preproduction`
 - **Ask for confirmation before any `git push --force`**
