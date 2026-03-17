@@ -7,12 +7,19 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN    // platform developers and administrators
+  CLIENT   // relocation companies
+  PROVIDER // independent consultants
+}
+
 model User {
   id            String    @id @default(cuid()) @map("user_ID")
   name          String?                        @map("user_T_name")
   email         String?   @unique              @map("user_T_email")
   emailVerified DateTime?                      @map("user_DT_emailVerifiedAt")
   image         String?                        @map("user_T_image")
+  role          Role      @default(CLIENT)     @map("user_T_role")
   accounts      Account[]
   sessions      Session[]
 
