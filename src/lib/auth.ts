@@ -1,17 +1,21 @@
-import NextAuth from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import Resend from "next-auth/providers/resend";
-import { prisma } from "@/lib/prisma";
+import NextAuth from "next-auth"
+import type { NextAuthConfig } from "next-auth"
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    Resend({
-      apiKey: process.env.RESEND_API_KEY,
-      from: process.env.EMAIL_FROM,
-    }),
-  ],
+export const authConfig: NextAuthConfig = {
   pages: {
-    signIn: "/auth/sign-in",
+    signIn: "/",
   },
-});
+  providers: [],
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user
+      const isPublicPath =
+        nextUrl.pathname === "/" ||
+        nextUrl.pathname.startsWith("/api/auth/")
+      if (isPublicPath) return true
+      return isLoggedIn
+    },
+  },
+}
+
+export const { auth } = NextAuth(authConfig)
