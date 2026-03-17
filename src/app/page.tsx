@@ -12,11 +12,11 @@ export default function Home() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Dev_Next01</CardTitle>
-          <CardDescription>Version 0.1 — Sprint #001</CardDescription>
+          <CardDescription>Version 0.2 — Sprint #002</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-sm">
-            Environment setup complete — ready for Sprint #002
+            Database connected — ready for business features
           </p>
         </CardContent>
       </Card>
