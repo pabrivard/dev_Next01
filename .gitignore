@@ -45,3 +45,7 @@ next-env.d.ts
 prisma/migrations/*.sql
 
 /src/generated/prisma
+
+# Capacitor native projects
+/ios/
+/android/
