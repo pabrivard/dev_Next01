@@ -48,22 +48,22 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center">
-      <Card className="w-full max-w-md shadow-md rounded-xl">
+      <Card className="w-full max-w-md shadow-md rounded-lg">
         <CardHeader className="pb-2">
-          <CardTitle className="text-center text-2xl font-bold">
+          <CardTitle className="text-center text-2xl font-black">
             Connectez-vous à votre compte
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-4 pb-8 px-8">
+        <CardContent className="py-8 px-8">
           {showSuccess ? (
-            <div className="flex flex-col items-center gap-8 py-4">
+            <div className="flex flex-col items-center gap-8">
               <p className="text-center text-sm text-muted-foreground">
                 Un lien de connexion vous a été envoyé à l&apos;adresse email
               </p>
               <p className="font-bold text-center">{sentEmail}</p>
               <Button
                 type="button"
-                className="w-full bg-black text-white hover:bg-black/90 rounded-lg"
+                className="w-full h-[45px] bg-black text-white hover:bg-black/90 rounded-md"
                 onClick={() => setShowSuccess(false)}
               >
                 &lt;-- Retour
@@ -81,9 +81,8 @@ export default function SignInPage() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="adam.smith@email.com"
                     autoComplete="email"
-                    className="pl-9"
+                    className="pl-9 h-[45px] rounded-md"
                   />
                 </div>
                 {inlineError && (
@@ -94,20 +93,20 @@ export default function SignInPage() {
               <Button
                 type="submit"
                 disabled={pending}
-                className="w-full bg-black text-white hover:bg-black/90 rounded-lg"
+                className="w-full h-[45px] bg-black text-white hover:bg-black/90 rounded-md"
               >
                 {pending ? "Envoi en cours..." : "Se connecter"}
               </Button>
 
               <div className="flex items-center gap-3 my-1">
                 <Separator className="flex-1" />
-                <span className="text-xs text-muted-foreground">ou</span>
+                <span className="text-xs text-muted-foreground font-light">ou</span>
                 <Separator className="flex-1" />
               </div>
 
               <a
                 href="#"
-                className="text-sm text-muted-foreground text-center hover:underline"
+                className="text-sm text-muted-foreground text-center font-light hover:underline"
               >
                 S&apos;inscrire
               </a>
