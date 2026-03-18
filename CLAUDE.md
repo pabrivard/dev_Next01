@@ -3,7 +3,7 @@
 ## Project description
 
 SaaS web application — Platform connecting relocation companies with independent consultants.
-Current version: 0.1.3 — Current sprint: Sprint #003.
+Current version: 0.1.4 — Current sprint: Sprint #004.
 
 ---
 
@@ -141,6 +141,42 @@ Format: `type: short description`
 ### Capacitor
 - `server.url` must be a hardcoded string (not `process.env`)
 - Placeholder: `https://your-production-url.com` — replace at deployment
+
+### No deployment this sprint — localhost only
+
+---
+
+## Sprint #004 — Key decisions
+
+### Sign-in page
+- Redesigned to match provided mockups (three states: default, error, success)
+- Implemented in `src/app/page.tsx` as a `'use client'` component using `useActionState` (React 19)
+- `src/components/SignInForm.tsx` deleted — all logic now lives directly in `page.tsx`
+- shadcn components used: Card, Input, Label, Button, Separator
+- Icons: `Mail` from lucide-react
+- No new CSS files — Tailwind utility classes only
+
+### Error handling
+- Server action (`src/app/actions/auth.ts`) returns typed error codes via `SignInResult` union type
+- Error codes: `INVALID_EMAIL`, `EMAIL_REQUIRED`, `USER_NOT_FOUND`, `ACCOUNT_INACTIVE`, `RESEND_ERROR`, `SERVER_ERROR`
+- `user_B_active` field not yet in schema — `ACCOUNT_INACTIVE` check skipped until field is added
+
+### Toast notifications
+- `sonner` (already installed) used for server/auth error toasts — no separate toast package needed
+- `Toaster` added to `src/app/layout.tsx` with `position="top-center"` and `richColors`
+- Toast errors: `USER_NOT_FOUND`, `ACCOUNT_INACTIVE`, `SERVER_ERROR`, `RESEND_ERROR`
+
+### Inline validation
+- `INVALID_EMAIL` → inline error below the email input: "Veuillez saisir une adresse email valide."
+- `EMAIL_REQUIRED` → inline error below the email input: "L'adresse email est obligatoire."
+
+### Footer links
+- Three links displayed at the bottom of the page: CGU, Mentions légales, Politique de confidentialité
+- All use `href="#"` — pages not yet created
+
+### S'inscrire link
+- Displayed below the separator on the sign-in form
+- Uses `href="#"` — registration page not yet created
 
 ### No deployment this sprint — localhost only
 
