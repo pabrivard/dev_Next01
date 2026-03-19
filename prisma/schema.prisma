@@ -20,6 +20,7 @@ model User {
   emailVerified DateTime?                      @map("user_DT_emailVerifiedAt")
   image         String?                        @map("user_T_image")
   role          Role      @default(CLIENT)     @map("user_T_role")
+  active        Boolean   @default(true)       @map("user_B_active")
   accounts      Account[]
   sessions      Session[]
 
