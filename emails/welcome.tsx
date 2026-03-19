@@ -17,7 +17,7 @@ export default function WelcomeEmail({ name }: WelcomeEmailProps) {
       <Head />
       <Body>
         <Container>
-          <Heading>Welcome to Dev_Next01</Heading>
+          <Heading>Welcome !</Heading>
           <Text>Hi {name}, your account is ready.</Text>
         </Container>
       </Body>
