@@ -7,13 +7,29 @@ export const authConfig: NextAuthConfig = {
   },
   providers: [],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
+    authorized({ auth: authSession, request }) {
+      const user = authSession?.user
+      const pathname = request.nextUrl.pathname
+
       const isPublicPath =
-        nextUrl.pathname === "/" ||
-        nextUrl.pathname.startsWith("/api/auth/")
+        pathname === "/" ||
+        pathname.startsWith("/api/auth/")
       if (isPublicPath) return true
-      return isLoggedIn
+
+      if (!user) return false
+      if (user.role === "ADMIN") return true
+
+      if (user.role === "CLIENT") {
+        if (pathname.includes("/provider/")) return false
+        return true
+      }
+
+      if (user.role === "PROVIDER") {
+        if (pathname.includes("/client/")) return false
+        return true
+      }
+
+      return false
     },
   },
 }
