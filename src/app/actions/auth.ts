@@ -47,8 +47,10 @@ export async function signInWithEmail(
     return { success: false, error: "USER_NOT_FOUND" }
   }
 
-  // Note: user_B_active field does not exist in the current schema.
-  // The ACCOUNT_INACTIVE check is skipped until the field is added in a future sprint.
+  // 3. Check user.active === true
+  if (!user.active) {
+    return { success: false, error: "ACCOUNT_INACTIVE" }
+  }
 
   try {
     await signIn("resend", { email, redirect: false })
