@@ -79,7 +79,7 @@
     --font-body: var(--font-public-sans);
     --font-label: var(--font-public-sans);
     /* Design system — institutional colors */
-    --color-primary-container: #23527c;
+    --color-primary-container: #1a3f5e;
     --color-on-primary: #ffffff;
     --color-primary-fixed: #d0e4ff;
     --color-primary-fixed-dim: #9fcafb;
@@ -145,6 +145,10 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+    /* Design system final overrides — must come after var() references */
+    --color-primary: #23527C;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #657797;
 }
 
 @layer base {
