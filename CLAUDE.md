@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.6 — Current sprint: Sprint 006.
+Current version: 0.1.7 — Current sprint: Sprint 007.
 
 ---
 
@@ -166,8 +166,7 @@ auto-increment IDs are not used in this project.
 - **Never hardcode user-visible strings** — always use translation keys
 - Error codes are resolved to translated strings in the UI layer —
   never in server actions
-- Language switcher on sign-in page — to be moved to header in a
-  future sprint
+- Language switcher in header nav — dropdown with locale options
 
 ---
 
@@ -181,15 +180,15 @@ auto-increment IDs are not used in this project.
 
 ### User model fields
 
-| Field          | Type     | Default  | Column          |
-|----------------|----------|----------|-----------------|
-| `id`           | String   | cuid()   | `user_ID`       |
-| `name`         | String?  | —        | `user_T_name`   |
-| `email`        | String?  | —        | `user_T_email`  |
-| `emailVerified`| DateTime?| —        | `user_DT_emailVerifiedAt` |
-| `image`        | String?  | —        | `user_T_image`  |
-| `role`         | Role     | CLIENT   | `user_T_role`   |
-| `active`       | Boolean  | true     | `user_B_active` |
+| Field          | Type      | Default  | Column                    |
+|----------------|-----------|----------|---------------------------|
+| `id`           | String    | cuid()   | `user_ID`                 |
+| `name`         | String?   | —        | `user_T_name`             |
+| `email`        | String?   | —        | `user_T_email`            |
+| `emailVerified`| DateTime? | —        | `user_DT_emailVerifiedAt` |
+| `image`        | String?   | —        | `user_T_image`            |
+| `role`         | Role      | CLIENT   | `user_T_role`             |
+| `active`       | Boolean   | true     | `user_B_active`           |
 
 ### User roles
 
@@ -201,11 +200,11 @@ auto-increment IDs are not used in this project.
 
 ### Role-based access control
 
-| Role       | Accessible routes                        |
-|------------|------------------------------------------|
-| `ADMIN`    | All routes                               |
-| `CLIENT`   | `/[locale]/client/*` + public routes     |
-| `PROVIDER` | `/[locale]/provider/*` + public routes   |
+| Role       | Accessible routes                      |
+|------------|----------------------------------------|
+| `ADMIN`    | All routes                             |
+| `CLIENT`   | `/[locale]/client/*` + public routes   |
+| `PROVIDER` | `/[locale]/provider/*` + public routes |
 
 - Role exposed on session: `session.user.role`
 - TypeScript types extended in `src/types/next-auth.d.ts`
@@ -245,7 +244,45 @@ auto-increment IDs are not used in this project.
 - Reads session via `auth()` from `src/lib/auth.node.ts`
 - Renders user email + role when authenticated
 - Renders nothing when unauthenticated
-- Placed in `src/app/[locale]/layout.tsx` above `{children}`
+- Placed in `src/app/[locale]/layout.tsx` between Header and `{children}`
+
+---
+
+## Design system — Editorial Institution
+
+Design tokens added to `src/app/globals.css` `@theme inline` block.
+
+### Color tokens (Tailwind classes)
+
+| Token                         | Hex value | Usage                        |
+|-------------------------------|-----------|------------------------------|
+| `primary`                     | #003b63   | Buttons, headings, accents   |
+| `primary-container`           | #23527c   | Button hover, gradient end   |
+| `on-primary`                  | #ffffff   | Text on primary bg           |
+| `surface`                     | #faf9f9   | Global background            |
+| `surface-container-low`       | #f5f3f3   | Card backgrounds             |
+| `surface-container-lowest`    | #ffffff   | Input, card interiors        |
+| `surface-container-high`      | #e9e8e8   | Borders, dividers            |
+| `on-surface`                  | #1b1c1c   | Body text                    |
+| `on-surface-variant`          | #42474e   | Labels, secondary text       |
+| `outline-variant`             | #c2c7cf   | Input borders                |
+| `error`                       | #ba1a1a   | Inline validation errors     |
+
+### Typography
+
+- Font: **Public Sans** (weights 300–800) via `next/font/google`
+- CSS variable: `--font-public-sans`
+- Tailwind classes: `font-headline`, `font-body`, `font-label`
+- Icons: Material Symbols Outlined (loaded via `<link>` in root layout)
+- Icon usage: `<span className="material-symbols-outlined">icon_name</span>`
+
+### Layout
+
+- Two-column asymmetric layout on sign-in page (max-w-5xl)
+- Left: headline, subtitle, version info card
+- Right: auth card with top accent gradient bar
+- Header: app name + Help link + language switcher (CSS hover dropdown)
+- Footer: app name + copyright + legal links
 
 ---
 

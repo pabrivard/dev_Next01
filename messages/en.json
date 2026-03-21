@@ -1,0 +1,34 @@
+{
+  "common": {
+    "appName": "DEV_NEXT01",
+    "help": "Help"
+  },
+  "signIn": {
+    "headline": "Sign in to your space",
+    "subtitle": "Access your personalized services and manage your applications securely.",
+    "newBadge": "New",
+    "versionInfo": "Our application is now available in version {version}",
+    "emailLabel": "Email",
+    "submitButton": "Sign in",
+    "submitting": "Sending...",
+    "registerPrompt": "Don't have an account yet?",
+    "registerButton": "Create account",
+    "secureConnection": "Connection secured by TLS 1.3 protocol",
+    "successMessage": "A sign-in link has been sent to your email address",
+    "backButton": "← Back",
+    "errors": {
+      "USER_NOT_FOUND": "No account is associated with this email address.",
+      "ACCOUNT_INACTIVE": "Your account is inactive. Please contact support.",
+      "SERVER_ERROR": "An error occurred. Please try again.",
+      "RESEND_ERROR": "Email sending failed. Please try again.",
+      "INVALID_EMAIL": "Please enter a valid email address.",
+      "EMAIL_REQUIRED": "Email address is required."
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Dev_Next01. All rights reserved.",
+    "legal": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Settings"
+  }
+}
