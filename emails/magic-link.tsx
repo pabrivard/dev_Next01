@@ -78,6 +78,8 @@ export default function MagicLinkEmail({
                 color: "#42474e",
                 lineHeight: "1.5",
                 margin: "0 0 32px",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
               }}
             >
               {translations.body}
@@ -102,10 +104,12 @@ export default function MagicLinkEmail({
                 fontSize: "13px",
                 color: "#42474e",
                 margin: "24px 0 0",
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
               }}
             >
               {translations.fallbackText}{" "}
-              <Link href={url} style={{ color: "#23527C" }}>
+              <Link href={url} style={{ color: "#23527C", wordBreak: "break-all" }}>
                 {url}
               </Link>
             </Text>
