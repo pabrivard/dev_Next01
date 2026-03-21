@@ -11,8 +11,11 @@ export const authConfig: NextAuthConfig = {
       const user = authSession?.user
       const pathname = request.nextUrl.pathname
 
+      // Allow root, locale roots (/fr, /en), and auth API endpoints
       const isPublicPath =
         pathname === "/" ||
+        pathname === "/fr" ||
+        pathname === "/en" ||
         pathname.startsWith("/api/auth/")
       if (isPublicPath) return true
 
