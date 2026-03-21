@@ -25,6 +25,18 @@
       "EMAIL_REQUIRED": "Email address is required."
     }
   },
+  "email": {
+    "magicLink": {
+      "subject": "Your sign-in link / DevNext01",
+      "systemLabel": "DEV_NEXT01 SYSTEM",
+      "greeting": "Hello,",
+      "body": "Your user experience and the protection of your data remain our absolute priority within this institution.",
+      "ctaButton": "Access my space",
+      "fallbackText": "Or copy this link:",
+      "signatureClosing": "Best regards,",
+      "signatureName": "The DEV_NEXT01 technical team"
+    }
+  },
   "footer": {
     "copyright": "© 2025 Dev_Next01. All rights reserved.",
     "legal": "Legal Notice",
