@@ -1,8 +1,10 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import Resend from "next-auth/providers/resend"
+import { getLocale } from "next-intl/server"
 import { prisma } from "@/lib/prisma"
 import { authConfig } from "@/lib/auth"
+import { sendMagicLinkEmail } from "@/lib/mail"
 import type { Role } from "@/generated/prisma/client"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -12,6 +14,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Resend({
       apiKey: process.env.RESEND_API_KEY,
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest: async ({ identifier, url }) => {
+        const locale = await getLocale()
+        await sendMagicLinkEmail({ to: identifier, url, locale })
+      },
     }),
   ],
   callbacks: {
