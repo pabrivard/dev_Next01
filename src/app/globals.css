@@ -7,15 +7,13 @@
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
-    --primary: #003b63;
-    --primary-foreground: #ffffff;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
+    --primary: #23527C;
+    --primary-foreground: #ffffff;
+    --secondary: #657797;
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
     --muted-foreground: oklch(0.556 0 0);
@@ -100,7 +98,7 @@
     --color-on-surface-variant: #42474e;
     --color-outline: #72777f;
     --color-outline-variant: #c2c7cf;
-    --color-secondary: #4d5f7e;
+    --color-secondary: #657797;
     --color-secondary-container: #c8dbff;
     --color-on-secondary: #ffffff;
     --color-on-secondary-container: #4e607e;
