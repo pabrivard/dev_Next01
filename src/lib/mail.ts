@@ -23,8 +23,6 @@ export async function sendMagicLinkEmail({
     body: t("magicLink.body"),
     ctaButton: t("magicLink.ctaButton"),
     fallbackText: t("magicLink.fallbackText"),
-    signatureClosing: t("magicLink.signatureClosing"),
-    signatureName: t("magicLink.signatureName"),
   }
 
   const subject = t("magicLink.subject")

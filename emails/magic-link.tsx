@@ -20,8 +20,6 @@ type MagicLinkEmailProps = {
     body: string
     ctaButton: string
     fallbackText: string
-    signatureClosing: string
-    signatureName: string
   }
 }
 
@@ -36,7 +34,8 @@ export default function MagicLinkEmail({
       <Body style={{ backgroundColor: "#faf9f9", fontFamily: "sans-serif" }}>
         <Container
           style={{
-            maxWidth: "600px",
+            maxWidth: "100%",
+            width: "100%",
             margin: "40px auto",
             backgroundColor: "#ffffff",
             border: "1px solid #e3e2e2",
@@ -62,7 +61,7 @@ export default function MagicLinkEmail({
           </Section>
 
           {/* Body */}
-          <Section style={{ padding: "32px 32px 0" }}>
+          <Section style={{ padding: "32px 32px 32px" }}>
             <Text
               style={{
                 fontSize: "18px",
@@ -109,31 +108,6 @@ export default function MagicLinkEmail({
               <Link href={url} style={{ color: "#23527C" }}>
                 {url}
               </Link>
-            </Text>
-          </Section>
-
-          {/* Footer */}
-          <Section style={{ padding: "32px 32px 24px" }}>
-            <Hr style={{ borderColor: "#e3e2e2", margin: "0 0 24px" }} />
-            <Text
-              style={{
-                fontSize: "14px",
-                color: "#42474e",
-                fontStyle: "italic",
-                margin: "0 0 4px",
-              }}
-            >
-              {translations.signatureClosing}
-            </Text>
-            <Text
-              style={{
-                fontSize: "14px",
-                fontWeight: "700",
-                color: "#1b1c1c",
-                margin: "0",
-              }}
-            >
-              {translations.signatureName}
             </Text>
           </Section>
         </Container>

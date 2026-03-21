@@ -28,13 +28,11 @@
   "email": {
     "magicLink": {
       "subject": "Your sign-in link / DevNext01",
-      "systemLabel": "DEV_NEXT01 SYSTEM",
+      "systemLabel": "DEV_NEXT01",
       "greeting": "Hello,",
       "body": "Your user experience and the protection of your data remain our absolute priority within this institution.",
       "ctaButton": "Access my space",
-      "fallbackText": "Or copy this link:",
-      "signatureClosing": "Best regards,",
-      "signatureName": "The DEV_NEXT01 technical team"
+      "fallbackText": "Or copy this link:"
     }
   },
   "footer": {
