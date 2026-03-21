@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.7 — Current sprint: Sprint 007.
+Current version: 0.1.8 — Current sprint: Sprint 008.
 
 ---
 
@@ -167,6 +167,81 @@ auto-increment IDs are not used in this project.
 - Error codes are resolved to translated strings in the UI layer —
   never in server actions
 - Language switcher in header nav — dropdown with locale options
+- Email translations use the next-intl server-side API:
+  `getTranslations({ locale, namespace: 'email' })` via
+  `src/lib/email-translations.ts` — not the React hook
+
+---
+
+## Email templates
+
+- Template location: `emails/`
+- Use `@react-email/components` primitives only:
+  `Html`, `Head`, `Body`, `Container`, `Section`, `Text`,
+  `Button`, `Link`, `Hr`, `Preview`
+- **Use inline styles only** — Tailwind CSS is not supported in email
+  clients. This is the only exception to the no-inline-styles rule.
+- All user-visible strings must use translation keys retrieved via
+  `getEmailTranslations(locale)` from `src/lib/email-translations.ts`
+- Template props must always include:
+  - `url: string` — the action URL (magic link, etc.)
+  - `locale: string` — the user's current locale
+  - `translations: { ... }` — pre-resolved translation strings
+- Subject lines must be translated — never hardcoded
+- Locale is retrieved server-side via `getLocale()` from
+  `next-intl/server` in the sign-in server action
+- All future email templates must follow the structure of
+  `emails/magic-link.tsx`
+
+### Color tokens for emails (inline styles)
+
+| Token                 | Hex       |
+|-----------------------|-----------|
+| primary               | `#003b63` |
+| primary-container     | `#23527c` |
+| on-surface            | `#1b1c1c` |
+| on-surface-variant    | `#42474e` |
+| surface               | `#faf9f9` |
+| surface-container-low | `#f5f3f3` |
+| outline-variant       | `#e3e2e2` |
+| on-primary            | `#ffffff` |
+
+
+---
+
+
+## Email templates
+
+- Template location: `emails/`
+- Use `@react-email/components` primitives only:
+  `Html`, `Head`, `Body`, `Container`, `Section`, `Text`,
+  `Button`, `Link`, `Hr`, `Preview`
+- **Use inline styles only** — Tailwind CSS is not supported in email
+  clients. This is the only exception to the no-inline-styles rule.
+- All user-visible strings must use translation keys retrieved via
+  `getEmailTranslations(locale)` from `src/lib/email-translations.ts`
+- Template props must always include:
+  - `url: string` — the action URL (magic link, etc.)
+  - `locale: string` — the user's current locale
+  - `translations: { ... }` — pre-resolved translation strings
+- Subject lines must be translated — never hardcoded
+- Locale is obtained inside `sendVerificationRequest` via `getLocale()`
+  from `next-intl/server` in `src/lib/auth.node.ts`
+- All future email templates must follow the structure of
+  `emails/magic-link.tsx`
+
+### Color tokens for emails (inline styles)
+
+| Token                 | Hex       |
+|-----------------------|-----------|
+| primary               | `#23527C` |
+| primary-container     | `#1a3f5e` |
+| on-surface            | `#1b1c1c` |
+| on-surface-variant    | `#42474e` |
+| surface               | `#faf9f9` |
+| surface-container-low | `#f5f3f3` |
+| outline-variant       | `#e3e2e2` |
+| on-primary            | `#ffffff` |
 
 ---
 
@@ -256,8 +331,8 @@ Design tokens added to `src/app/globals.css` `@theme inline` block.
 
 | Token                         | Hex value | Usage                        |
 |-------------------------------|-----------|------------------------------|
-| `primary`                     | #003b63   | Buttons, headings, accents   |
-| `primary-container`           | #23527c   | Button hover, gradient end   |
+| `primary`                     | #23527C   | Buttons, headings, accents   |
+| `primary-container`           | #1a3f5e   | Button hover, gradient end   |
 | `on-primary`                  | #ffffff   | Text on primary bg           |
 | `surface`                     | #faf9f9   | Global background            |
 | `surface-container-low`       | #f5f3f3   | Card backgrounds             |
