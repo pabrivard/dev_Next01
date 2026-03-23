@@ -5,6 +5,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       role: Role
+      active: boolean
     } & DefaultSession["user"]
   }
 }

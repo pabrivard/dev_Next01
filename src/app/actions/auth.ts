@@ -1,6 +1,7 @@
 "use server"
 
 import { z } from "zod"
+import { getLocale } from "next-intl/server"
 import { signIn } from "@/lib/auth.node"
 import { prisma } from "@/lib/prisma"
 
@@ -53,7 +54,8 @@ export async function signInWithEmail(
   }
 
   try {
-    await signIn("resend", { email, redirect: false })
+    const locale = await getLocale()
+    await signIn("resend", { email, redirect: false, redirectTo: `/${locale}/dashboard` })
     return { success: true, email }
   } catch (error) {
     // SendVerificationRequestError is thrown by Auth.js when the email provider fails
