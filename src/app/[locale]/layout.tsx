@@ -5,7 +5,6 @@ import { getMessages } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
-import UserInfo from "@/components/layout/UserInfo"
 
 export default async function LocaleLayout({
   children,
@@ -26,7 +25,6 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <div className="min-h-screen flex flex-col bg-surface">
         <Header locale={locale} />
-        <UserInfo />
         {children}
         <Footer locale={locale} />
       </div>
