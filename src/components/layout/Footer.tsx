@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server"
+import { AppDrawer } from "@/components/layout/AppDrawer"
 
 interface FooterProps {
   locale: string
@@ -15,24 +16,30 @@ export default async function Footer({ locale }: FooterProps) {
           <p className="text-xs text-on-surface-variant">{t("copyright")}</p>
         </div>
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-          <a
-            href="#"
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors"
-          >
-            {t("legal")}
-          </a>
-          <a
-            href="#"
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors"
-          >
-            {t("privacy")}
-          </a>
-          <a
-            href="#"
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors"
-          >
-            {t("cookies")}
-          </a>
+          <AppDrawer
+            drawerKey="legal"
+            trigger={
+              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
+                {t("legal")}
+              </button>
+            }
+          />
+          <AppDrawer
+            drawerKey="privacy"
+            trigger={
+              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
+                {t("privacy")}
+              </button>
+            }
+          />
+          <AppDrawer
+            drawerKey="cookies"
+            trigger={
+              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
+                {t("cookies")}
+              </button>
+            }
+          />
         </div>
       </div>
     </footer>
