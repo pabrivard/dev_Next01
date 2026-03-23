@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.9 — Current sprint: Sprint 009.
+Current version: 0.1.10 — Current sprint: Sprint 010.
 
 ---
 
@@ -275,13 +275,14 @@ auto-increment IDs are not used in this project.
 
 ### Role-based access control
 
-| Role       | Accessible routes                      |
-|------------|----------------------------------------|
-| `ADMIN`    | All routes                             |
-| `CLIENT`   | `/[locale]/client/*` + public routes   |
-| `PROVIDER` | `/[locale]/provider/*` + public routes |
+| Role       | Accessible routes                                            |
+|------------|--------------------------------------------------------------|
+| `ADMIN`    | All routes                                                   |
+| `CLIENT`   | `/[locale]/client/*` + public routes                         |
+| `PROVIDER` | `/[locale]/provider/*` + public routes                       |
 
 - Role exposed on session: `session.user.role`
+- Active status exposed on session: `session.user.active`
 - TypeScript types extended in `src/types/next-auth.d.ts`
 
 ### Route protection
@@ -291,6 +292,27 @@ auto-increment IDs are not used in this project.
   and Auth.js (route protection) — intl runs first
 - Middleware is Edge-compatible — no Node.js native imports
 - Unauthenticated users redirected to `/[locale]`
+
+### Protected routes
+
+| Route                          | Access          |
+|--------------------------------|-----------------|
+| `/[locale]/admin/dashboard`    | ADMIN only      |
+| `/[locale]/client/dashboard`   | CLIENT only     |
+| `/[locale]/provider/dashboard` | PROVIDER only   |
+| `/[locale]/dashboard`          | Any authenticated user (redirects by role) |
+
+### Post-login redirect flow
+
+Magic link click → `/api/auth/callback/resend`
+  → `/[locale]/dashboard` (generic dispatcher, server redirect)
+  → `/[locale]/admin/dashboard` (ADMIN)
+  → `/[locale]/client/dashboard` (CLIENT)
+  → `/[locale]/provider/dashboard` (PROVIDER)
+
+- `redirectTo` set in sign-in action via `getLocale()` —
+  locale-aware magic link callbackUrl
+- `redirect` callback in `auth.node.ts` as safety net
 
 ### Sign-in server action — check order
 
@@ -312,14 +334,6 @@ auto-increment IDs are not used in this project.
 | `SERVER_ERROR`     | Any other unexpected error       |
 
 ---
-
-## Session-aware layout
-
-- `UserInfo` server component in `src/components/layout/UserInfo.tsx`
-- Reads session via `auth()` from `src/lib/auth.node.ts`
-- Renders user email + role when authenticated
-- Renders nothing when unauthenticated
-- Placed in `src/app/[locale]/layout.tsx` between Header and `{children}`
 
 ---
 

@@ -29,19 +29,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user.role === "ADMIN") return true
 
       if (user.role === "CLIENT") {
-        if (pathname.includes("/provider/")) return false
+        if (pathname.includes("/provider/") || pathname.includes("/admin/")) return false
         return true
       }
 
       if (user.role === "PROVIDER") {
-        if (pathname.includes("/client/")) return false
+        if (pathname.includes("/client/") || pathname.includes("/admin/")) return false
         return true
       }
 
       return false
     },
-    session({ session, user }) {
-      session.user.role = (user as unknown as { role: Role }).role
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url
+      return `${baseUrl}/fr/dashboard`
+    },
+    async session({ session, user }) {
+      const adapterUser = user as unknown as { role: Role; active: boolean }
+      session.user.role = adapterUser.role
+      session.user.active = adapterUser.active
       return session
     },
   },

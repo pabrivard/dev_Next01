@@ -23,12 +23,12 @@ export const authConfig: NextAuthConfig = {
       if (user.role === "ADMIN") return true
 
       if (user.role === "CLIENT") {
-        if (pathname.includes("/provider/")) return false
+        if (pathname.includes("/provider/") || pathname.includes("/admin/")) return false
         return true
       }
 
       if (user.role === "PROVIDER") {
-        if (pathname.includes("/client/")) return false
+        if (pathname.includes("/client/") || pathname.includes("/admin/")) return false
         return true
       }
 
