@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.8 — Current sprint: Sprint 008.
+Current version: 0.1.9 — Current sprint: Sprint 009.
 
 ---
 
@@ -320,6 +320,27 @@ auto-increment IDs are not used in this project.
 - Renders user email + role when authenticated
 - Renders nothing when unauthenticated
 - Placed in `src/app/[locale]/layout.tsx` between Header and `{children}`
+
+---
+
+## Drawer system
+
+- Component: shadcn `Drawer` (vaul), `direction="right"`
+- Responsive width: 90vw mobile / 50vw tablet (sm) / 33vw desktop (lg)
+- Wrapper: `src/components/layout/AppDrawer.tsx`
+  - Props: `drawerKey: DrawerKey`, `trigger: React.ReactNode`
+  - Manages open/close via shadcn Drawer primitives
+  - Close button uses `drawer.close` translation key
+- Content: `src/components/layout/DrawerContent.tsx`
+  - Export: `DrawerPageContent` (named to avoid conflict with shadcn `DrawerContent`)
+  - Renders title, intro paragraph, and three sections per drawer key
+  - Uses `useTranslations('drawer')` from next-intl
+- Four drawer keys: `help`, `legal`, `privacy`, `cookies`
+- Translation keys: `drawer.{key}.{title|intro|section{1-3}Title|section{1-3}Body}`
+- Triggers:
+  - Header: "Aide" / "Help" link → `drawerKey="help"`
+  - Footer: three links → `drawerKey="legal"`, `"privacy"`, `"cookies"`
+- Clicking outside or pressing Escape closes the drawer
 
 ---
 
