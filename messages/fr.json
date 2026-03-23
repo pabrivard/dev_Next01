@@ -35,6 +35,28 @@
       "fallbackText": "Ou copiez ce lien :"
     }
   },
+  "dashboard": {
+    "admin": {
+      "title": "Tableau de bord Administrateur",
+      "welcome": "Bienvenue, {email}",
+      "role": "Rôle : Administrateur"
+    },
+    "client": {
+      "title": "Tableau de bord Client",
+      "welcome": "Bienvenue, {email}",
+      "role": "Rôle : Client"
+    },
+    "provider": {
+      "title": "Tableau de bord Prestataire",
+      "welcome": "Bienvenue, {email}",
+      "role": "Rôle : Prestataire"
+    },
+    "unauthorized": {
+      "title": "Accès non autorisé",
+      "message": "Vous n'avez pas les droits nécessaires pour accéder à cette page.",
+      "back": "Retour à la connexion"
+    }
+  },
   "drawer": {
     "close": "Fermer",
     "help": {

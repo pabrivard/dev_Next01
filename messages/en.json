@@ -35,6 +35,28 @@
       "fallbackText": "Or copy this link:"
     }
   },
+  "dashboard": {
+    "admin": {
+      "title": "Administrator Dashboard",
+      "welcome": "Welcome, {email}",
+      "role": "Role: Administrator"
+    },
+    "client": {
+      "title": "Client Dashboard",
+      "welcome": "Welcome, {email}",
+      "role": "Role: Client"
+    },
+    "provider": {
+      "title": "Provider Dashboard",
+      "welcome": "Welcome, {email}",
+      "role": "Role: Provider"
+    },
+    "unauthorized": {
+      "title": "Unauthorized",
+      "message": "You do not have the required permissions to access this page.",
+      "back": "Back to sign in"
+    }
+  },
   "drawer": {
     "close": "Close",
     "help": {
