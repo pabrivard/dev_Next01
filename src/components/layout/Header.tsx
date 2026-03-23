@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
+import { AppDrawer } from "@/components/layout/AppDrawer"
 
 interface HeaderProps {
   locale: string
@@ -19,12 +20,14 @@ export default async function Header({ locale }: HeaderProps) {
           {t("appName")}
         </div>
         <nav className="hidden md:flex items-center gap-8">
-          <a
-            href="#"
-            className="text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary-container transition-colors duration-200"
-          >
-            {t("help")}
-          </a>
+          <AppDrawer
+            drawerKey="help"
+            trigger={
+              <button className="text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary transition-colors duration-200">
+                {t("help")}
+              </button>
+            }
+          />
           <div className="relative group">
             <button className="flex items-center gap-1 text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary-container transition-colors duration-200">
               {currentLocaleLabel}
