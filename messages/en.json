@@ -35,6 +35,49 @@
       "fallbackText": "Or copy this link:"
     }
   },
+  "drawer": {
+    "close": "Close",
+    "help": {
+      "title": "Help",
+      "intro": "Welcome to the DEV_NEXT01 help center.",
+      "section1Title": "How do I access my space?",
+      "section1Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "section2Title": "I did not receive my sign-in email",
+      "section2Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "section3Title": "Contact support",
+      "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
+    },
+    "legal": {
+      "title": "Legal Notice",
+      "intro": "Legal information relating to the DEV_NEXT01 platform.",
+      "section1Title": "Platform publisher",
+      "section1Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+      "section2Title": "Hosting",
+      "section2Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "section3Title": "Intellectual property",
+      "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": "Protection and processing of your personal data.",
+      "section1Title": "Data collected",
+      "section1Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "section2Title": "Purpose of processing",
+      "section2Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "section3Title": "Your rights",
+      "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    "cookies": {
+      "title": "Cookie Settings",
+      "intro": "Information about the use of cookies on DEV_NEXT01.",
+      "section1Title": "Essential cookies",
+      "section1Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "section2Title": "Analytical cookies",
+      "section2Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "section3Title": "Manage my preferences",
+      "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+  },
   "footer": {
     "copyright": "© 2025 Dev_Next01. All rights reserved.",
     "legal": "Legal Notice",
