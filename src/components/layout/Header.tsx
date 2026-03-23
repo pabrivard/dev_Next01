@@ -22,11 +22,8 @@ export default async function Header({ locale }: HeaderProps) {
         <nav className="hidden md:flex items-center gap-8">
           <AppDrawer
             drawerKey="help"
-            trigger={
-              <button className="text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary transition-colors duration-200">
-                {t("help")}
-              </button>
-            }
+            label={t("help")}
+            className="cursor-pointer text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary transition-colors duration-200"
           />
           <div className="relative group">
             <button className="flex items-center gap-1 text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary-container transition-colors duration-200">

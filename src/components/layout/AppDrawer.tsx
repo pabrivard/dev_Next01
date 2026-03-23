@@ -14,16 +14,17 @@ type DrawerKey = 'help' | 'legal' | 'privacy' | 'cookies'
 
 type AppDrawerProps = {
   drawerKey: DrawerKey
-  trigger: React.ReactNode
+  label: string
+  className?: string
 }
 
-export function AppDrawer({ drawerKey, trigger }: AppDrawerProps) {
+export function AppDrawer({ drawerKey, label, className }: AppDrawerProps) {
   const t = useTranslations('drawer')
 
   return (
     <Drawer direction="right">
-      <DrawerTrigger asChild>
-        {trigger}
+      <DrawerTrigger className={className}>
+        {label}
       </DrawerTrigger>
       <DrawerContent
         className="top-0 right-0 left-auto mt-0 h-full w-full max-w-[90vw] sm:max-w-[50vw] lg:max-w-[33vw] rounded-none border-l border-surface-container-high"
@@ -32,7 +33,7 @@ export function AppDrawer({ drawerKey, trigger }: AppDrawerProps) {
         <div className="flex flex-col h-full overflow-y-auto p-8">
           <div className="flex justify-end mb-6">
             <DrawerClose asChild>
-              <button className="text-sm text-on-surface-variant hover:text-primary transition-colors">
+              <button className="cursor-pointer text-sm text-on-surface-variant hover:text-primary transition-colors">
                 {t('close')}
               </button>
             </DrawerClose>

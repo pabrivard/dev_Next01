@@ -18,27 +18,18 @@ export default async function Footer({ locale }: FooterProps) {
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
           <AppDrawer
             drawerKey="legal"
-            trigger={
-              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
-                {t("legal")}
-              </button>
-            }
+            label={t("legal")}
+            className="cursor-pointer text-xs text-on-surface-variant hover:text-primary transition-colors"
           />
           <AppDrawer
             drawerKey="privacy"
-            trigger={
-              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
-                {t("privacy")}
-              </button>
-            }
+            label={t("privacy")}
+            className="cursor-pointer text-xs text-on-surface-variant hover:text-primary transition-colors"
           />
           <AppDrawer
             drawerKey="cookies"
-            trigger={
-              <button className="text-xs text-on-surface-variant hover:text-primary transition-colors">
-                {t("cookies")}
-              </button>
-            }
+            label={t("cookies")}
+            className="cursor-pointer text-xs text-on-surface-variant hover:text-primary transition-colors"
           />
         </div>
       </div>
