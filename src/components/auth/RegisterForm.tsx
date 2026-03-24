@@ -111,9 +111,9 @@ export default function RegisterForm() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="male">{t("genderMale")}</SelectItem>
-                    <SelectItem value="female">{t("genderFemale")}</SelectItem>
-                    <SelectItem value="neutral">{t("genderNeutral")}</SelectItem>
+                    <SelectItem value="1" label={t("genderMale")}>{t("genderMale")}</SelectItem>
+                    <SelectItem value="2" label={t("genderFemale")}>{t("genderFemale")}</SelectItem>
+                    <SelectItem value="3" label={t("genderNeutral")}>{t("genderNeutral")}</SelectItem>
                   </SelectContent>
                 </Select>
                 {fieldError("GENDER_REQUIRED") && (
