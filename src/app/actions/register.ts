@@ -4,6 +4,7 @@ import crypto from "crypto"
 import { cookies } from "next/headers"
 import { z } from "zod"
 import bcrypt from "bcryptjs"
+import { isValidPhoneNumber, type CountryCode } from "libphonenumber-js"
 import { getLocale } from "next-intl/server"
 import { prisma } from "@/lib/prisma"
 import { sendRegistrationEmail } from "@/lib/mail"
@@ -49,12 +50,9 @@ const registerSchema = z.object({
   lastName: z.string().min(1, "LAST_NAME_REQUIRED"),
   firstName: z.string().min(1, "FIRST_NAME_REQUIRED"),
   email: z.string().min(1, "EMAIL_REQUIRED").email("EMAIL_INVALID"),
+  phoneCountry: z.string().min(1, "PHONE_REQUIRED"),
   phoneCode: z.string().min(1, "PHONE_REQUIRED"),
-  phoneNumber: z
-    .string()
-    .min(1, "PHONE_REQUIRED")
-    .transform((val) => val.replace(/\D/g, ""))
-    .refine((val) => val.length >= 7 && val.length <= 15, "PHONE_INVALID"),
+  phoneNumber: z.string().min(1, "PHONE_REQUIRED"),
 })
 
 const pinSchema = z.object({
@@ -94,6 +92,7 @@ export async function registerAction(
     lastName: (formData.get("lastName") ?? "").toString().trim(),
     firstName: (formData.get("firstName") ?? "").toString().trim(),
     email: (formData.get("email") ?? "").toString().trim().toLowerCase(),
+    phoneCountry: (formData.get("phoneCountry") ?? "").toString().trim(),
     phoneCode: (formData.get("phoneCode") ?? "").toString().trim(),
     phoneNumber: (formData.get("phoneNumber") ?? "").toString().trim(),
   }
@@ -110,7 +109,11 @@ export async function registerAction(
   if (!acceptTerms) return { success: false, error: "ACCEPT_TERMS_REQUIRED" }
   if (!acceptPrivacy) return { success: false, error: "ACCEPT_PRIVACY_REQUIRED" }
 
-  const { gender, lastName, firstName, email, phoneCode, phoneNumber } = result.data
+  const { gender, lastName, firstName, email, phoneCountry, phoneCode, phoneNumber } = result.data
+
+  if (!isValidPhoneNumber(phoneNumber, phoneCountry as CountryCode)) {
+    return { success: false, error: "PHONE_INVALID" }
+  }
 
   try {
     const existing = await prisma.user.findUnique({ where: { email } })

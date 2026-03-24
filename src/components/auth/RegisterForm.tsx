@@ -1,10 +1,11 @@
 "use client"
 
-import { useActionState, useEffect, useState } from "react"
+import { useActionState, useEffect, useMemo, useState } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
+import { getCountries, getCountryCallingCode, type CountryCode } from "libphonenumber-js"
 import {
   Select,
   SelectContent,
@@ -18,15 +19,6 @@ import { registerAction, type RegisterResult } from "@/app/actions/register"
 
 const TOAST_ERRORS = ["EMAIL_ALREADY_EXISTS", "SERVER_ERROR"]
 
-const COUNTRY_CODES = [
-  { code: "+33", flag: "🇫🇷", label: "+33" },
-  { code: "+1", flag: "🇺🇸", label: "+1" },
-  { code: "+44", flag: "🇬🇧", label: "+44" },
-  { code: "+32", flag: "🇧🇪", label: "+32" },
-  { code: "+41", flag: "🇨🇭", label: "+41" },
-  { code: "+352", flag: "🇱🇺", label: "+352" },
-  { code: "+49", flag: "🇩🇪", label: "+49" },
-]
 
 export default function RegisterForm() {
   const t = useTranslations("register")
@@ -40,9 +32,32 @@ export default function RegisterForm() {
   )
 
   const [gender, setGender] = useState("")
-  const [phoneCode, setPhoneCode] = useState("+33")
+  const [lastName, setLastName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phoneCountry, setPhoneCountry] = useState<CountryCode>("FR")
+  const [phoneNumber, setPhoneNumber] = useState("")
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [acceptPrivacy, setAcceptPrivacy] = useState(false)
+
+  const phoneDialCode = `+${getCountryCallingCode(phoneCountry)}`
+
+  const genderLabel: Record<string, string> = {
+    "1": t("genderMale"),
+    "2": t("genderFemale"),
+    "3": t("genderNeutral"),
+  }
+
+  const countryList = useMemo(() => {
+    const displayNames = new Intl.DisplayNames([locale], { type: "region" })
+    return getCountries()
+      .map((code) => ({
+        code,
+        dialCode: `+${getCountryCallingCode(code)}`,
+        name: displayNames.of(code) ?? code,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, locale))
+  }, [locale])
 
   useEffect(() => {
     if (!state) return
@@ -95,9 +110,10 @@ export default function RegisterForm() {
             <h2 className="text-xl font-bold text-on-surface mb-6">{t("title")}</h2>
 
             <form action={action} className="space-y-5">
-              {/* Hidden inputs for controlled values */}
+              {/* Hidden inputs for Select/Checkbox controlled values */}
               <input type="hidden" name="gender" value={gender} />
-              <input type="hidden" name="phoneCode" value={phoneCode} />
+              <input type="hidden" name="phoneCountry" value={phoneCountry} />
+              <input type="hidden" name="phoneCode" value={phoneDialCode} />
               <input type="hidden" name="acceptTerms" value={acceptTerms ? "on" : ""} />
               <input type="hidden" name="acceptPrivacy" value={acceptPrivacy ? "on" : ""} />
 
@@ -108,12 +124,12 @@ export default function RegisterForm() {
                 </label>
                 <Select onValueChange={(v) => setGender(v ?? "")} value={gender}>
                   <SelectTrigger className="w-full !h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
-                    <SelectValue />
+                    <SelectValue>{gender ? genderLabel[gender] : ""}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1" label={t("genderMale")}>{t("genderMale")}</SelectItem>
-                    <SelectItem value="2" label={t("genderFemale")}>{t("genderFemale")}</SelectItem>
-                    <SelectItem value="3" label={t("genderNeutral")}>{t("genderNeutral")}</SelectItem>
+                    <SelectItem value="1">{t("genderMale")}</SelectItem>
+                    <SelectItem value="2">{t("genderFemale")}</SelectItem>
+                    <SelectItem value="3">{t("genderNeutral")}</SelectItem>
                   </SelectContent>
                 </Select>
                 {fieldError("GENDER_REQUIRED") && (
@@ -129,6 +145,8 @@ export default function RegisterForm() {
                 <input
                   name="lastName"
                   type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {fieldError("LAST_NAME_REQUIRED") && (
@@ -144,6 +162,8 @@ export default function RegisterForm() {
                 <input
                   name="firstName"
                   type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {fieldError("FIRST_NAME_REQUIRED") && (
@@ -160,6 +180,8 @@ export default function RegisterForm() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {(fieldError("EMAIL_REQUIRED") || fieldError("EMAIL_INVALID")) && (
@@ -175,15 +197,20 @@ export default function RegisterForm() {
                   {t("phoneLabel")}
                 </label>
                 <div className="flex gap-2">
-                  <div className="w-28 shrink-0">
-                    <Select onValueChange={(v) => setPhoneCode(v ?? "+33")} value={phoneCode}>
+                  <div className="w-36 shrink-0">
+                    <Select
+                      onValueChange={(v) => setPhoneCountry((v ?? "FR") as CountryCode)}
+                      value={phoneCountry}
+                    >
                       <SelectTrigger className="w-full !h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
-                        <SelectValue />
+                        <SelectValue>
+                          {phoneDialCode}
+                        </SelectValue>
                       </SelectTrigger>
-                      <SelectContent>
-                        {COUNTRY_CODES.map(({ code, flag, label }) => (
+                      <SelectContent className="!w-max">
+                        {countryList.map(({ code, dialCode, name }) => (
                           <SelectItem key={code} value={code}>
-                            {flag} {label}
+                            {name} ({dialCode})
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -192,6 +219,8 @@ export default function RegisterForm() {
                   <input
                     name="phoneNumber"
                     type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     className="flex-1 h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                   />
                 </div>
@@ -262,6 +291,7 @@ export default function RegisterForm() {
             {t("alreadyAccount")}{" "}
             <Link
               href="/"
+              locale={locale as "fr" | "en"}
               className="text-primary font-medium hover:underline"
             >
               {t("signInLink")}

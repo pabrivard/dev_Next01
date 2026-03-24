@@ -1,6 +1,7 @@
 "use client"
 
 import { useActionState, useEffect, useState } from "react"
+import { useParams } from "next/navigation"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
@@ -12,6 +13,8 @@ const INLINE_ERRORS = ["INVALID_EMAIL", "EMAIL_REQUIRED"]
 
 export default function SignInForm() {
   const t = useTranslations("signIn")
+  const params = useParams()
+  const locale = (params.locale as string) ?? "fr"
 
   const [state, action, pending] = useActionState<SignInResult | null, FormData>(
     signInWithEmail,
@@ -119,6 +122,7 @@ export default function SignInForm() {
               <p className="text-sm text-on-surface-variant mb-4">{t("registerPrompt")}</p>
               <Link
                 href="/register"
+                locale={locale as "fr" | "en"}
                 className="block w-full border border-primary text-primary font-bold py-3 rounded-lg hover:bg-surface-container-low transition-colors text-sm text-center"
               >
                 {t("registerButton")}
