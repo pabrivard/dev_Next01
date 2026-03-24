@@ -16,6 +16,10 @@ export const authConfig: NextAuthConfig = {
         pathname === "/" ||
         pathname === "/fr" ||
         pathname === "/en" ||
+        pathname === "/fr/register" ||
+        pathname === "/en/register" ||
+        pathname === "/fr/register/verify" ||
+        pathname === "/en/register/verify" ||
         pathname.startsWith("/api/auth/")
       if (isPublicPath) return true
 
