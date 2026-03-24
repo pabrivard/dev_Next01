@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.10 — Current sprint: Sprint 010.
+Current version: 0.1.11 — Current sprint: Sprint 011.
 
 ---
 
@@ -244,6 +244,26 @@ auto-increment IDs are not used in this project.
 | on-primary            | `#ffffff` |
 
 ---
+
+## Registration flow (PROVIDER)
+
+- Registration page: `/[locale]/register` (public)
+- Verify page: `/[locale]/register/verify?email=...` (public)
+- New users: role PROVIDER, active immediately after PIN confirmation
+- PIN: 6 digits, generated with `crypto.randomInt`, stored as bcrypt
+  hash in `n01_registration_pins`
+- PIN expiry: 2 hours — max 3 incorrect attempts before block
+- Blocked PIN: user must request a new one via resend button
+- After PIN confirmation: session created directly in `n01_sessions`
+  + cookie set — user is authenticated immediately
+- Registration email: locale-aware, uses `emails/registration.tsx`
+- Server actions: `src/app/actions/register.ts`
+  - `registerAction` — creates user + profile + PIN + sends email
+  - `verifyPinAction` — verifies PIN, creates session + sets cookie
+  - `resendPinAction` — generates new PIN and sends email
+- New database tables: `n01_users_profile`, `n01_registration_pins`
+- New User fields: `acceptTerms`, `acceptPrivacy`, `acceptTermsAt`,
+  `acceptPrivacyAt`
 
 ## Authentication architecture
 
