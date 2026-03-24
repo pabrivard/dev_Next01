@@ -33,6 +33,70 @@
       "body": "Your user experience and the protection of your data remain our absolute priority within this institution.",
       "ctaButton": "Access my space",
       "fallbackText": "Or copy this link:"
+    },
+    "registration": {
+      "subject": "Your registration code / DevNext01",
+      "systemLabel": "DEV_NEXT01",
+      "greeting": "Hello {firstName},",
+      "body": "Thank you for registering on DEV_NEXT01. Here is your 6-digit confirmation code:",
+      "pinLabel": "Your code:",
+      "expiryNote": "This code is valid for 2 hours.",
+      "fallbackText": "If you did not request this code, please ignore this email."
+    }
+  },
+  "register": {
+    "headline": "Create your provider space",
+    "subtitle": "Join our network of independent relocation consultants.",
+    "title": "Create an account",
+    "genderLabel": "Gender",
+    "genderPlaceholder": "Select your gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderNeutral": "Neutral",
+    "lastNameLabel": "Last name",
+    "lastNamePlaceholder": "Your last name",
+    "firstNameLabel": "First name",
+    "firstNamePlaceholder": "Your first name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phoneLabel": "Mobile phone",
+    "phonePlaceholder": "Phone number",
+    "acceptTerms": "I accept the Terms of Use",
+    "acceptPrivacy": "I accept the Privacy Policy",
+    "submitButton": "Register",
+    "alreadyAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "errors": {
+      "genderRequired": "Please select your gender.",
+      "lastNameRequired": "Last name is required.",
+      "firstNameRequired": "First name is required.",
+      "emailRequired": "Email address is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "acceptTermsRequired": "You must accept the terms of use.",
+      "acceptPrivacyRequired": "You must accept the privacy policy.",
+      "emailAlreadyExists": "An account already exists with this email address.",
+      "serverError": "Something went wrong. Please try again."
+    }
+  },
+  "verify": {
+    "headline": "Verify your email",
+    "subtitle": "A confirmation code has been sent to you.",
+    "title": "Confirm your registration",
+    "pinLabel": "Confirmation code",
+    "pinPlaceholder": "000000",
+    "submitButton": "Confirm",
+    "resendButton": "Resend code",
+    "resendSuccess": "A new code has been sent to {email}",
+    "emailSentTo": "A 6-digit code has been sent to",
+    "expiresIn": "This code is valid for 2 hours.",
+    "errors": {
+      "pinRequired": "Please enter the confirmation code.",
+      "pinInvalid": "Incorrect code. You have {remaining} attempt(s) remaining.",
+      "pinExpired": "This code has expired. Please request a new one.",
+      "pinBlocked": "Too many incorrect attempts. Please request a new code.",
+      "serverError": "Something went wrong. Please try again."
     }
   },
   "dashboard": {
