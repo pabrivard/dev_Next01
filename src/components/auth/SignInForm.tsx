@@ -1,8 +1,10 @@
 "use client"
 
 import { useActionState, useEffect, useState } from "react"
+import { useParams } from "next/navigation"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import { signInWithEmail, type SignInResult } from "@/app/actions/auth"
 import { version } from "../../../package.json"
 
@@ -11,6 +13,8 @@ const INLINE_ERRORS = ["INVALID_EMAIL", "EMAIL_REQUIRED"]
 
 export default function SignInForm() {
   const t = useTranslations("signIn")
+  const params = useParams()
+  const locale = (params.locale as string) ?? "fr"
 
   const [state, action, pending] = useActionState<SignInResult | null, FormData>(
     signInWithEmail,
@@ -116,12 +120,13 @@ export default function SignInForm() {
 
             <div className="mt-10 pt-8 border-t border-surface-container-high text-center">
               <p className="text-sm text-on-surface-variant mb-4">{t("registerPrompt")}</p>
-              <button
-                type="button"
-                className="w-full border border-primary text-primary font-bold py-3 rounded-lg hover:bg-surface-container-low transition-colors text-sm"
+              <Link
+                href="/register"
+                locale={locale as "fr" | "en"}
+                className="block w-full border border-primary text-primary font-bold py-3 rounded-lg hover:bg-surface-container-low transition-colors text-sm text-center"
               >
                 {t("registerButton")}
-              </button>
+              </Link>
             </div>
           </div>
 

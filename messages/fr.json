@@ -33,6 +33,70 @@
       "body": "Votre expérience utilisateur et la protection de vos données restent notre priorité absolue au sein de cette institution.",
       "ctaButton": "Accéder à mon espace",
       "fallbackText": "Ou copiez ce lien :"
+    },
+    "registration": {
+      "subject": "Votre code d'inscription / DevNext01",
+      "systemLabel": "DEV_NEXT01",
+      "greeting": "Bonjour {firstName},",
+      "body": "Merci de votre inscription sur DEV_NEXT01. Voici votre code de confirmation à 6 chiffres :",
+      "pinLabel": "Votre code :",
+      "expiryNote": "Ce code est valable 2 heures.",
+      "fallbackText": "Si vous n'avez pas demandé ce code, ignorez cet email."
+    }
+  },
+  "register": {
+    "headline": "Créez votre espace prestataire",
+    "subtitle": "Rejoignez notre réseau de consultants indépendants en relocation.",
+    "title": "Créer un compte",
+    "genderLabel": "Genre",
+    "genderPlaceholder": "Sélectionnez votre genre",
+    "genderMale": "Homme",
+    "genderFemale": "Femme",
+    "genderNeutral": "Neutre",
+    "lastNameLabel": "Nom",
+    "lastNamePlaceholder": "Votre nom de famille",
+    "firstNameLabel": "Prénom",
+    "firstNamePlaceholder": "Votre prénom",
+    "emailLabel": "Email",
+    "emailPlaceholder": "votre@email.com",
+    "phoneLabel": "Téléphone mobile",
+    "phonePlaceholder": "Numéro de téléphone",
+    "acceptTerms": "J'accepte les Conditions d'Utilisation du Site",
+    "acceptPrivacy": "J'accepte la politique de confidentialité des données",
+    "submitButton": "S'inscrire",
+    "alreadyAccount": "Vous avez déjà un compte ?",
+    "signInLink": "Se connecter",
+    "errors": {
+      "genderRequired": "Veuillez sélectionner votre genre.",
+      "lastNameRequired": "Le nom est obligatoire.",
+      "firstNameRequired": "Le prénom est obligatoire.",
+      "emailRequired": "L'adresse email est obligatoire.",
+      "emailInvalid": "Veuillez saisir une adresse email valide.",
+      "phoneRequired": "Le numéro de téléphone est obligatoire.",
+      "phoneInvalid": "Veuillez saisir un numéro de téléphone valide.",
+      "acceptTermsRequired": "Vous devez accepter les conditions d'utilisation.",
+      "acceptPrivacyRequired": "Vous devez accepter la politique de confidentialité.",
+      "emailAlreadyExists": "Un compte existe déjà avec cette adresse email.",
+      "serverError": "Une erreur est survenue. Veuillez réessayer."
+    }
+  },
+  "verify": {
+    "headline": "Vérifiez votre email",
+    "subtitle": "Un code de confirmation vous a été envoyé.",
+    "title": "Confirmer votre inscription",
+    "pinLabel": "Code de confirmation",
+    "pinPlaceholder": "000000",
+    "submitButton": "Confirmer",
+    "resendButton": "Renvoyer le code",
+    "resendSuccess": "Un nouveau code a été envoyé à {email}",
+    "emailSentTo": "Un code à 6 chiffres a été envoyé à",
+    "expiresIn": "Ce code est valable 2 heures.",
+    "errors": {
+      "pinRequired": "Veuillez saisir le code de confirmation.",
+      "pinInvalid": "Code incorrect. Il vous reste {remaining} tentative(s).",
+      "pinExpired": "Ce code a expiré. Veuillez en demander un nouveau.",
+      "pinBlocked": "Trop de tentatives incorrectes. Veuillez demander un nouveau code.",
+      "serverError": "Une erreur est survenue. Veuillez réessayer."
     }
   },
   "dashboard": {

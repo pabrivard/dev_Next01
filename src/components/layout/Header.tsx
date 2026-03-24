@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server"
-import { Link } from "@/i18n/navigation"
 import { AppDrawer } from "@/components/layout/AppDrawer"
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher"
 
 interface HeaderProps {
   locale: string
@@ -25,23 +25,12 @@ export default async function Header({ locale }: HeaderProps) {
             label={t("help")}
             className="cursor-pointer text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary transition-colors duration-200"
           />
-          <div className="relative group">
-            <button className="flex items-center gap-1 text-on-surface-variant text-sm font-medium tracking-tight hover:text-primary-container transition-colors duration-200">
-              {currentLocaleLabel}
-              <span className="material-symbols-outlined text-sm">expand_more</span>
-            </button>
-            <div className="absolute right-0 top-full pt-2 w-36 hidden group-hover:block z-50">
-              <div className="bg-surface-container-lowest rounded-lg shadow-xl border border-surface-container-high py-2">
-                <Link
-                  href="/"
-                  locale={otherLocale as "fr" | "en"}
-                  className="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors"
-                >
-                  {otherLocaleLabel}
-                </Link>
-              </div>
-            </div>
-          </div>
+          <LocaleSwitcher
+            currentLocale={locale}
+            currentLocaleLabel={currentLocaleLabel}
+            otherLocale={otherLocale as "fr" | "en"}
+            otherLocaleLabel={otherLocaleLabel}
+          />
         </nav>
       </div>
     </header>
