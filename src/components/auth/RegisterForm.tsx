@@ -107,7 +107,7 @@ export default function RegisterForm() {
                   {t("genderLabel")}
                 </label>
                 <Select onValueChange={(v) => setGender(v ?? "")} value={gender}>
-                  <SelectTrigger className="w-full h-auto py-3 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
+                  <SelectTrigger className="w-full !h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -129,7 +129,7 @@ export default function RegisterForm() {
                 <input
                   name="lastName"
                   type="text"
-                  className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
+                  className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {fieldError("LAST_NAME_REQUIRED") && (
                   <p className="text-error text-xs">{fieldError("LAST_NAME_REQUIRED")}</p>
@@ -144,7 +144,7 @@ export default function RegisterForm() {
                 <input
                   name="firstName"
                   type="text"
-                  className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
+                  className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {fieldError("FIRST_NAME_REQUIRED") && (
                   <p className="text-error text-xs">{fieldError("FIRST_NAME_REQUIRED")}</p>
@@ -160,7 +160,7 @@ export default function RegisterForm() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
+                  className="block w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                 />
                 {(fieldError("EMAIL_REQUIRED") || fieldError("EMAIL_INVALID")) && (
                   <p className="text-error text-xs">
@@ -177,7 +177,7 @@ export default function RegisterForm() {
                 <div className="flex gap-2">
                   <div className="w-28 shrink-0">
                     <Select onValueChange={(v) => setPhoneCode(v ?? "+33")} value={phoneCode}>
-                      <SelectTrigger className="w-full h-auto py-3 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
+                      <SelectTrigger className="w-full !h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -192,7 +192,7 @@ export default function RegisterForm() {
                   <input
                     name="phoneNumber"
                     type="tel"
-                    className="flex-1 px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
+                    className="flex-1 h-12 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none transition-all text-on-surface"
                   />
                 </div>
                 {(fieldError("PHONE_REQUIRED") || fieldError("PHONE_INVALID")) && (
