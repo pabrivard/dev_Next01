@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from "react"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 import { signInWithEmail, type SignInResult } from "@/app/actions/auth"
 import { version } from "../../../package.json"
 
@@ -116,12 +117,12 @@ export default function SignInForm() {
 
             <div className="mt-10 pt-8 border-t border-surface-container-high text-center">
               <p className="text-sm text-on-surface-variant mb-4">{t("registerPrompt")}</p>
-              <button
-                type="button"
-                className="w-full border border-primary text-primary font-bold py-3 rounded-lg hover:bg-surface-container-low transition-colors text-sm"
+              <Link
+                href="/register"
+                className="block w-full border border-primary text-primary font-bold py-3 rounded-lg hover:bg-surface-container-low transition-colors text-sm text-center"
               >
                 {t("registerButton")}
-              </button>
+              </Link>
             </div>
           </div>
 
