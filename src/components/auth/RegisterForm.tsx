@@ -94,7 +94,7 @@ export default function RegisterForm() {
 
             <h2 className="text-xl font-bold text-on-surface mb-6">{t("title")}</h2>
 
-            <form action={action} className="space-y-4">
+            <form action={action} className="space-y-5">
               {/* Hidden inputs for controlled values */}
               <input type="hidden" name="gender" value={gender} />
               <input type="hidden" name="phoneCode" value={phoneCode} />
