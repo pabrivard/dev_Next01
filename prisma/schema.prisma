@@ -14,17 +14,50 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(cuid()) @map("user_ID")
-  name          String?                        @map("user_T_name")
-  email         String?   @unique              @map("user_T_email")
-  emailVerified DateTime?                      @map("user_DT_emailVerifiedAt")
-  image         String?                        @map("user_T_image")
-  role          Role      @default(CLIENT)     @map("user_T_role")
-  active        Boolean   @default(true)       @map("user_B_active")
-  accounts      Account[]
-  sessions      Session[]
+  id               String      @id @default(cuid()) @map("user_ID")
+  name             String?                          @map("user_T_name")
+  email            String?     @unique              @map("user_T_email")
+  emailVerified    DateTime?                        @map("user_DT_emailVerifiedAt")
+  image            String?                          @map("user_T_image")
+  role             Role        @default(CLIENT)     @map("user_T_role")
+  active           Boolean     @default(true)       @map("user_B_active")
+  acceptTerms      Boolean     @default(false)      @map("user_B_acceptTerms")
+  acceptPrivacy    Boolean     @default(false)      @map("user_B_acceptPrivacy")
+  acceptTermsAt    DateTime?                        @map("user_DT_acceptTermsAt")
+  acceptPrivacyAt  DateTime?                        @map("user_DT_acceptPrivacyAt")
+  accounts         Account[]
+  sessions         Session[]
+  profile          UserProfile?
 
   @@map("n01_users")
+}
+
+model UserProfile {
+  id          String   @id @default(cuid()) @map("profile_ID")
+  userId      String   @unique              @map("user_ID")
+  gender      String?                       @map("profile_T_gender")
+  lastName    String?                       @map("profile_T_lastName")
+  firstName   String?                       @map("profile_T_firstName")
+  phoneCode   String?                       @map("profile_T_phoneCode")
+  phoneNumber String?                       @map("profile_T_phoneNumber")
+  createdAt   DateTime @default(now())      @map("profile_DT_createdAt")
+  updatedAt   DateTime @updatedAt           @map("profile_DT_updatedAt")
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("n01_users_profile")
+}
+
+model RegistrationPin {
+  id        String   @id @default(cuid()) @map("pin_ID")
+  email     String                        @map("pin_T_email")
+  code      String                        @map("pin_T_code")
+  attempts  Int      @default(0)          @map("pin_N_attempts")
+  blocked   Boolean  @default(false)      @map("pin_B_blocked")
+  expires   DateTime                      @map("pin_DT_expires")
+  createdAt DateTime @default(now())      @map("pin_DT_createdAt")
+
+  @@map("n01_registration_pins")
 }
 
 model Account {
