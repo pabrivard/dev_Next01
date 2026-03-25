@@ -1,6 +1,6 @@
 import { setRequestLocale } from "next-intl/server"
 
-export default async function ProviderDashboardPage({
+export default async function ProviderMissionsPage({
   params,
 }: {
   params: Promise<{ locale: string }>
