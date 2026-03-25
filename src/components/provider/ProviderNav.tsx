@@ -57,7 +57,7 @@ export default function ProviderNav({ locale }: ProviderNavProps) {
         {t("layout.spaceTitle")}
       </h1>
       <Tabs value={segment}>
-        <TabsList className="bg-transparent gap-1 h-auto p-0 overflow-x-auto flex-nowrap">
+        <TabsList className="bg-transparent gap-3 !h-auto p-0 overflow-x-auto flex-nowrap rounded-none">
           {tabs.map((tab) => {
             const Icon = tab.icon
             return (
@@ -67,10 +67,10 @@ export default function ProviderNav({ locale }: ProviderNavProps) {
                 onClick={() =>
                   router.push(`/${locale}/provider/${tab.value}`)
                 }
-                className="flex items-center gap-2 px-4 py-2 rounded-t-lg whitespace-nowrap data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-none data-[state=inactive]:text-on-surface-variant data-[state=inactive]:bg-transparent cursor-pointer"
+                className="flex items-center gap-2 px-4 !h-[60px] rounded-t-lg !rounded-bl-none !rounded-br-none whitespace-nowrap text-on-surface-variant bg-white/30 data-active:bg-white data-active:text-primary data-active:!shadow-none cursor-pointer"
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="hidden sm:inline font-bold">{tab.label}</span>
               </TabsTrigger>
             )
           })}

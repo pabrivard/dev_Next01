@@ -35,8 +35,8 @@ export default function ProviderHeader({
     fullPathname.replace(new RegExp(`^/(${localePattern})(/|$)`), "/") || "/"
 
   const otherLocale = locale === "fr" ? "en" : "fr"
-  const currentLocaleLabel = locale.toUpperCase()
-  const otherLocaleLabel = otherLocale.toUpperCase()
+  const currentLocaleLabel = locale === "fr" ? "Français" : "English"
+  const otherLocaleLabel = otherLocale === "fr" ? "Français" : "English"
 
   const displayName =
     firstName && lastName ? `${firstName} ${lastName}` : (email ?? "")
@@ -78,8 +78,8 @@ export default function ProviderHeader({
               {currentLocaleLabel}
               <ChevronDown className="h-3 w-3" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="!w-20">
-              <DropdownMenuItem>
+            <DropdownMenuContent align="end" className="!w-32">
+              <DropdownMenuItem className="h-10">
                 <Link
                   href={pathname}
                   locale={otherLocale as "fr" | "en"}
@@ -103,17 +103,14 @@ export default function ProviderHeader({
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="!w-48">
-              <DropdownMenuItem>
-                <Link
-                  href={`/${locale}/provider/dashboard`}
-                  className="w-full"
-                >
+              <DropdownMenuItem className="h-10">
+                <Link href="/provider/dashboard" className="w-full">
                   {t("mySpace")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <form action={signOutAction} className="w-full">
+              <DropdownMenuItem className="h-10">
+                <form action={signOutAction.bind(null, locale)} className="w-full">
                   <button
                     type="submit"
                     className="w-full text-left text-error cursor-pointer"

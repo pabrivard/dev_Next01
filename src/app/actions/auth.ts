@@ -1,7 +1,6 @@
 "use server"
 
 import { z } from "zod"
-import { getLocale } from "next-intl/server"
 import { signIn, signOut } from "@/lib/auth.node"
 import { prisma } from "@/lib/prisma"
 
@@ -54,7 +53,7 @@ export async function signInWithEmail(
   }
 
   try {
-    const locale = await getLocale()
+    const locale = (formData.get("locale") ?? "fr").toString()
     await signIn("resend", { email, redirect: false, redirectTo: `/${locale}/dashboard` })
     return { success: true, email }
   } catch (error) {
@@ -66,6 +65,6 @@ export async function signInWithEmail(
   }
 }
 
-export async function signOutAction() {
-  await signOut({ redirectTo: "/fr" })
+export async function signOutAction(locale: string) {
+  await signOut({ redirectTo: `/${locale}` })
 }
