@@ -164,6 +164,42 @@
       "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
   },
+  "provider": {
+    "layout": {
+      "spaceTitle": "My provider space",
+      "mySpace": "My space",
+      "signOut": "Sign out",
+      "notifications": "Notifications",
+      "search": "Search"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "profile": "My profile",
+      "missionSearch": "Mission search",
+      "missions": "My missions",
+      "accounting": "My accounting"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "empty": "Your dashboard is being built."
+    },
+    "profile": {
+      "title": "My profile",
+      "empty": "Your profile is being built."
+    },
+    "missionSearch": {
+      "title": "Mission search",
+      "empty": "Mission search is being built."
+    },
+    "missions": {
+      "title": "My missions",
+      "empty": "Your missions are being built."
+    },
+    "accounting": {
+      "title": "My accounting",
+      "empty": "Your accounting is being built."
+    }
+  },
   "footer": {
     "copyright": "© 2025 Dev_Next01. All rights reserved.",
     "legal": "Legal Notice",
