@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth.node'
 import { redirect } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export default async function ClientDashboardPage({
   params,
@@ -8,6 +8,7 @@ export default async function ClientDashboardPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const session = await auth()
 
   if (!session?.user) redirect(`/${locale}`)

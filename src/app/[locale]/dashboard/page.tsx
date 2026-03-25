@@ -1,5 +1,6 @@
 import { auth } from '@/lib/auth.node'
 import { redirect } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 
 export default async function DashboardPage({
   params,
@@ -7,6 +8,7 @@ export default async function DashboardPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const session = await auth()
 
   if (!session?.user) {
