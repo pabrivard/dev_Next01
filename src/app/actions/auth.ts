@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { getLocale } from "next-intl/server"
-import { signIn } from "@/lib/auth.node"
+import { signIn, signOut } from "@/lib/auth.node"
 import { prisma } from "@/lib/prisma"
 
 const emailSchema = z.object({
@@ -64,4 +64,8 @@ export async function signInWithEmail(
     }
     return { success: false, error: "SERVER_ERROR" }
   }
+}
+
+export async function signOutAction() {
+  await signOut({ redirectTo: "/fr" })
 }
