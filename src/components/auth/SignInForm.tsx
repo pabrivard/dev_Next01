@@ -84,6 +84,7 @@ export default function SignInForm() {
               </div>
             ) : (
               <form action={action} className="space-y-6">
+                <input type="hidden" name="locale" value={locale} />
                 <div className="space-y-2">
                   <label
                     htmlFor="email"

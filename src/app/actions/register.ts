@@ -64,6 +64,10 @@ const pinSchema = z.object({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+function toTitleCase(str: string): string {
+  return str.toLowerCase().replace(/(^|[\s-])\w/g, (c) => c.toUpperCase())
+}
+
 function generatePin(): string {
   return String(crypto.randomInt(100000, 999999))
 }
@@ -115,6 +119,10 @@ export async function registerAction(
     return { success: false, error: "PHONE_INVALID" }
   }
 
+  const normalizedLastName = lastName.toUpperCase()
+  const normalizedFirstName = toTitleCase(firstName)
+  const fullName = `${normalizedFirstName} ${normalizedLastName}`
+
   try {
     const existing = await prisma.user.findUnique({ where: { email } })
     if (existing) return { success: false, error: "EMAIL_ALREADY_EXISTS" }
@@ -123,6 +131,7 @@ export async function registerAction(
     const user = await prisma.user.create({
       data: {
         email,
+        name: fullName,
         role: "PROVIDER",
         active: true,
         acceptTerms: true,
@@ -136,8 +145,8 @@ export async function registerAction(
       data: {
         userId: user.id,
         gender,
-        lastName,
-        firstName,
+        lastName: normalizedLastName,
+        firstName: normalizedFirstName,
         phoneCode,
         phoneNumber,
       },

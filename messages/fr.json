@@ -164,6 +164,42 @@
       "section3Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
   },
+  "provider": {
+    "layout": {
+      "spaceTitle": "Mon espace prestataire",
+      "mySpace": "Mon espace",
+      "signOut": "Déconnexion",
+      "notifications": "Notifications",
+      "search": "Rechercher"
+    },
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "profile": "Mon profil",
+      "missionSearch": "Recherche de missions",
+      "missions": "Mes missions",
+      "accounting": "Ma comptabilité"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "empty": "Votre tableau de bord est en cours de construction."
+    },
+    "profile": {
+      "title": "Mon profil",
+      "empty": "Votre profil est en cours de construction."
+    },
+    "missionSearch": {
+      "title": "Recherche de missions",
+      "empty": "La recherche de missions est en cours de construction."
+    },
+    "missions": {
+      "title": "Mes missions",
+      "empty": "Vos missions sont en cours de construction."
+    },
+    "accounting": {
+      "title": "Ma comptabilité",
+      "empty": "Votre comptabilité est en cours de construction."
+    }
+  },
   "footer": {
     "copyright": "© 2025 Dev_Next01. Tous droits réservés.",
     "legal": "Mentions légales",

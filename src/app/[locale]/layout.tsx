@@ -3,8 +3,6 @@ import { notFound } from "next/navigation"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { routing } from "@/i18n/routing"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
 
 export default async function LocaleLayout({
   children,
@@ -25,11 +23,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <div className="min-h-screen flex flex-col bg-surface">
-        <Header locale={locale} />
-        {children}
-        <Footer locale={locale} />
-      </div>
+      {children}
     </NextIntlClientProvider>
   )
 }
