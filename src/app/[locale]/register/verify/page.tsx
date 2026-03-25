@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import { setRequestLocale } from "next-intl/server"
 import VerifyForm from "@/components/auth/VerifyForm"
 
 export default async function VerifyPage({
@@ -9,6 +10,7 @@ export default async function VerifyPage({
   searchParams: Promise<{ email?: string }>
 }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const { email } = await searchParams
 
   if (!email) {
