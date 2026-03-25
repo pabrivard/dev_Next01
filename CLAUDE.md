@@ -4,7 +4,7 @@
 
 SaaS web application — Platform connecting relocation companies with
 independent consultants.
-Current version: 0.1.11 — Current sprint: Sprint 011.
+Current version: 0.1.12 — Current sprint: Sprint 012.
 
 ---
 
@@ -354,6 +354,48 @@ Magic link click → `/api/auth/callback/resend`
 | `SERVER_ERROR`     | Any other unexpected error       |
 
 ---
+
+---
+
+## Provider layout (Sprint 012)
+
+- **ProviderHeader**: `src/components/provider/ProviderHeader.tsx`
+  - Client component — Base UI DropdownMenu (no asChild — use className on Trigger directly)
+  - Props: firstName, lastName, email, locale
+  - Right actions: search button, notifications button, locale switcher dropdown, profile dropdown
+  - Profile dropdown: "Mon espace" link + separator + signOutAction form
+  - Locale switcher: uses `usePathname` from `next/navigation` + strips locale prefix
+
+- **ProviderNav**: `src/components/provider/ProviderNav.tsx`
+  - Client component — shadcn Tabs (TabsList + TabsTrigger, no TabsContent needed)
+  - Active tab detected from `usePathname()` by splitting on `/provider/`
+  - Tab click uses `useRouter` from `next/navigation` with full locale-prefixed href
+  - Background: `bg-[#e8eaf6]`; active tab: `data-[state=active]:bg-white data-[state=active]:text-primary`
+  - Mobile: icons only (`hidden sm:inline` on labels)
+
+- **Provider layout**: `src/app/[locale]/provider/layout.tsx`
+  - Server component — auth guard (PROVIDER role required)
+  - Fetches `n01_users_profile` for firstName + lastName
+  - Renders: ProviderHeader → ProviderNav → `<main>` → {children}
+  - Does NOT use public Header/Footer
+
+- **Provider routes**:
+  - `[locale]/provider/dashboard` — active tab: "dashboard"
+  - `[locale]/provider/profile` — active tab: "profile"
+  - `[locale]/provider/mission-search` — active tab: "mission-search"
+  - `[locale]/provider/missions` — active tab: "missions"
+  - `[locale]/provider/accounting` — active tab: "accounting"
+
+- **Sign-out**: `signOutAction` in `src/app/actions/auth.ts`
+  - Calls `signOut({ redirectTo: "/fr" })` from `src/lib/auth.node.ts`
+  - Deletes session from n01_sessions + clears cookie automatically
+
+- **Layout architecture** (public vs provider):
+  - `src/app/[locale]/layout.tsx` — i18n wrapper only (NextIntlClientProvider), NO Header/Footer
+  - `src/app/[locale]/(public)/layout.tsx` — adds public Header + Footer
+  - `src/app/[locale]/(public)/page.tsx` — sign-in page
+  - `src/app/[locale]/(public)/register/` — registration flow
+  - Provider, admin, client sub-layouts each manage their own headers
 
 ---
 

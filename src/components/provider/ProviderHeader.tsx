@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import { routing } from "@/i18n/routing"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,6 +41,9 @@ export default function ProviderHeader({
   const displayName =
     firstName && lastName ? `${firstName} ${lastName}` : (email ?? "")
 
+  const triggerBase =
+    "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+
   return (
     <header className="w-full bg-white border-b border-surface-container-high px-6 py-3">
       <div className="flex items-center justify-between">
@@ -53,33 +55,35 @@ export default function ProviderHeader({
         {/* Right actions */}
         <div className="flex items-center gap-1">
           {/* Search */}
-          <Button variant="ghost" size="icon" aria-label={t("search")}>
-            <Search className="h-5 w-5 text-on-surface-variant" />
-          </Button>
+          <button
+            aria-label={t("search")}
+            className={`${triggerBase} h-9 w-9 text-on-surface-variant`}
+          >
+            <Search className="h-5 w-5" />
+          </button>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" aria-label={t("notifications")}>
-            <Bell className="h-5 w-5 text-on-surface-variant" />
-          </Button>
+          <button
+            aria-label={t("notifications")}
+            className={`${triggerBase} h-9 w-9 text-on-surface-variant`}
+          >
+            <Bell className="h-5 w-5" />
+          </button>
 
           {/* Language switcher */}
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-sm font-medium text-on-surface-variant gap-1 px-2"
-              >
-                {currentLocaleLabel}
-                <ChevronDown className="h-3 w-3" />
-              </Button>
+            <DropdownMenuTrigger
+              className={`${triggerBase} h-9 px-2 text-on-surface-variant`}
+            >
+              {currentLocaleLabel}
+              <ChevronDown className="h-3 w-3" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-20">
-              <DropdownMenuItem asChild>
+            <DropdownMenuContent align="end" className="!w-20">
+              <DropdownMenuItem>
                 <Link
                   href={pathname}
                   locale={otherLocale as "fr" | "en"}
-                  className="w-full cursor-pointer"
+                  className="w-full"
                 >
                   {otherLocaleLabel}
                 </Link>
@@ -89,29 +93,26 @@ export default function ProviderHeader({
 
           {/* Profile dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="flex items-center gap-2 px-3"
-              >
-                <CircleUser className="h-5 w-5 text-on-surface-variant" />
-                <span className="hidden md:inline text-sm font-medium text-on-surface">
-                  {displayName}
-                </span>
-                <ChevronDown className="h-4 w-4 text-on-surface-variant" />
-              </Button>
+            <DropdownMenuTrigger
+              className={`${triggerBase} h-9 px-3 text-on-surface-variant gap-2`}
+            >
+              <CircleUser className="h-5 w-5" />
+              <span className="hidden md:inline text-sm font-medium text-on-surface">
+                {displayName}
+              </span>
+              <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem asChild>
+            <DropdownMenuContent align="end" className="!w-48">
+              <DropdownMenuItem>
                 <Link
                   href={`/${locale}/provider/dashboard`}
-                  className="w-full cursor-pointer"
+                  className="w-full"
                 >
                   {t("mySpace")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem>
                 <form action={signOutAction} className="w-full">
                   <button
                     type="submit"
